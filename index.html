@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vampire Shooter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="ui-container">
+        <div id="hud">
+            <div id="score-container">Score: <span id="score">0</span></div>
+            <div id="hp-container">
+                <div id="hp-bar-bg">
+                    <div id="hp-bar"></div>
+                </div>
+            </div>
+            <div id="xp-container">
+                <div id="xp-bar-bg">
+                    <div id="xp-bar"></div>
+                </div>
+                <div id="level">Lvl 1</div>
+            </div>
+        </div>
+
+        <div id="start-screen" class="screen">
+            <h1>Vampire Shooter</h1>
+            <p>Survive the night. Collect Blood Gems.</p>
+            <button id="start-btn">Hunt</button>
+        </div>
+
+        <div id="game-over-screen" class="screen hidden">
+            <h1>You Died</h1>
+            <p>Final Score: <span id="final-score">0</span></p>
+            <button id="restart-btn">Resurrect</button>
+        </div>
+
+        <div id="upgrade-screen" class="screen hidden">
+            <h2>Choose Power</h2>
+            <div id="upgrade-options">
+            </div>
+        </div>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <script src="game-data.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>
