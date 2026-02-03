@@ -1,0 +1,165 @@
+/* Reset & Core */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #050505; /* Deep black */
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+canvas {
+    display: block;
+}
+
+/* UI Overlay */
+#ui-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Let clicks pass through to canvas when playing */
+}
+
+/* HUD */
+#hud {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+#score-container {
+    font-family: 'Creepster', cursive;
+    font-size: 2rem;
+    color: #ff3333;
+    text-shadow: 0 0 10px #ff0000;
+}
+
+#hp-container, #xp-container {
+    width: 200px;
+}
+
+#hp-bar-bg, #xp-bar-bg {
+    width: 100%;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+#hp-bar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff0000, #ff6666);
+    box-shadow: 0 0 10px #ff0000;
+    transition: width 0.2s;
+}
+
+#xp-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #aa00ff, #d580ff);
+    box-shadow: 0 0 10px #aa00ff;
+    transition: width 0.2s;
+}
+
+#level {
+    text-align: right;
+    font-weight: bold;
+    color: #d580ff;
+}
+
+/* Screens */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.85);
+    pointer-events: auto; /* Enable clicks on screens */
+    transition: opacity 0.3s;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+h1, h2 {
+    font-family: 'Creepster', cursive;
+    font-size: 5rem;
+    color: #ff0000;
+    text-shadow: 0 0 20px #ff0000;
+    margin: 0 0 20px 0;
+}
+
+p {
+    font-size: 1.5rem;
+    color: #ccc;
+    margin-bottom: 40px;
+}
+
+button {
+    background: transparent;
+    border: 2px solid #ff0000;
+    color: #ff0000;
+    font-family: 'Creepster', cursive;
+    font-size: 2rem;
+    padding: 10px 40px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background: #ff0000;
+    color: black;
+    box-shadow: 0 0 20px #ff0000;
+    transform: scale(1.1);
+}
+
+/* Upgrade Menu */
+#upgrade-options {
+    display: flex;
+    gap: 20px;
+}
+
+.upgrade-card {
+    background: rgba(20, 0, 0, 0.9);
+    border: 1px solid #ff3333;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 200px;
+}
+
+.upgrade-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #ff3333;
+    background: rgba(40, 0, 0, 1);
+}
+
+.upgrade-card h3 {
+    margin: 0 0 10px 0;
+    color: #ff9999;
+}
+
+.upgrade-card p {
+    font-size: 1rem;
+    margin: 0;
+}
