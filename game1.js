@@ -60,3 +60,36 @@ class InputHandler {
         window.addEventListener('mouseup', () => this.mouse.down = false);
     }
 }
+
+class Particle {
+    constructor(x, y, color, speed, size) {
+        this.x = x
+        this.y = y
+        this.color = color
+        this.size = size
+        this.angle = Math.random() * Math.PI * 2
+        this.vx = Math.cos(angle) * speed
+        this.vy = Math.sin(angle) * speed
+        this.life = 1.0
+        this.decy = Math.random() * 0.02 + 0.02;
+
+    }
+
+    update() {
+        this.x += this.vx
+        this.y += this.vy
+        this.life -= this.decy
+        this.size *= 0.95;
+
+    }
+
+    draw(ctx) {
+        ctx.save();
+        ctx.globalAlpha = this.life
+        ctx.fillStyle = this.color
+        ctx.beginPath()
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.restore();
+    }
+}
