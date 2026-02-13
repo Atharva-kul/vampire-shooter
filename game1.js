@@ -93,3 +93,54 @@ class Particle {
         ctx.restore();
     }
 }
+
+class Maze {
+    constructor(cols, rows) {
+        this.cols = cols
+        this.rows = rows
+        this.cellsize = 100
+        this.walls = []
+        this.generate()
+    }
+
+    generate() {
+        this.walls = []
+        const grid = []
+
+        for(let r = 0; r<this.rows; r++) {
+            grid[r] = []
+
+            for(let c=0; c<this.cols; c++) {
+                grid[r][c] = {
+                    visited: false,
+                    top: true,
+                    right: true,
+                    bottom: true,
+                    left: true,
+                    row: r,
+                    col: c
+                };
+            }
+        }
+
+        const stack = []
+        const current = grid[0][0]
+        current.visited = true
+        stack.push(current)
+
+        while(stack.length>0) {
+            const curr = stack[stack.length - 1]
+            const neighbors = this.getNeighbors(grid, curr.row, curr.col)
+
+            if(neighbors.length > 0) {
+                const next = neighbors[Math.floor(Math.random()*neighbors.length)]
+                this.removeWalls(curr, next)
+                next.visited = true
+                stack.push(next)
+            } else {
+                stack.pop()
+            }
+
+        }
+    }
+}
