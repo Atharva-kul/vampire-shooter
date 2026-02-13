@@ -140,7 +140,102 @@ class Maze {
             } else {
                 stack.pop()
             }
+        }
 
+        this.walls.push({
+            x: 0,
+            y: 0,
+            w: this.cols*this.cellsize,
+            h:5
+        }) // top wall
+        this.walls.push({
+            x: 0,
+            y: this.rows*this.cellSize,
+            w: this.cols*this.cellsize,
+            h:5
+        }) //bottom wall
+        this.walls.push({
+            x: 0,
+            y: 0,
+            w: 5,
+            h: this.rows*this.cellSize
+        }) // left wall
+        this.walls.push({
+            x: 0,
+            y: 0,
+            w: this.cols*this.cellsize,
+            h:5
+        }) // right wall
+
+        for(let r=0; r<this.rows; r++) {
+            for(let c=0; c<this.cols; c++) {
+                const cell = grid[r][c]
+                const x = c * this.cellsize
+                const y = r*this.cellsize
+
+                if(cell.bottom && r<this.rows-1) {
+                    this.walls.push({
+                        x: x,
+                        y: y+this.cellSize+5,
+                        w: this.cellSize,
+                        h: 5
+                    })
+                }
+                if(cell.right && c<this.cols-1) {
+                    this.walls.push({
+                        x: x+this.cellSize,
+                        y: y, 
+                        w: 5,
+                        h: this.cellSize+5
+                    })
+                }
+            }
         }
     }
+
+    getNeighbors(grid, r, c) {
+        const neighbors = []
+        if(r>0 && !grid[r-1][c].visited) {
+            neighbors.push(grid[r-1][c])
+        }
+        if(r<this.rows-1 && !grid[r+1][c].visited) {
+            neighbors.push(grid[r+1][c])
+        }
+        if(c>0 && !grid[r][c-1].visited) {
+            neighbors.push(grid[r][c-1])
+        }
+        if(c< this.cols-1 && !grid[r][c+1].visited) {
+            neighbors.push(grid[r][c+1])
+        }
+        return neighbors
+    }
+
+    removeWalls(a, b) {
+        const x = a.col-b.col
+        if(x === 1) {
+            a.left = false
+            b.right = false
+        }
+        else if(x===-1) {
+            a.right = false
+            b.left = false
+        }
+
+        const y = a.row-b.row
+        if(y===1) {
+            a.top = false
+            b.bottom = false;
+        }
+    }
+
+    draw(ctx) {
+        ctx.fillStyle = '#00ffff'
+        ctx.shadowBlur = 10
+        ctx.shadowColor = '#00ffff'
+        this.walls.forEach(w => {
+            ctx.fillRect(w.x, w.y, w.w, w.h)
+        })
+        ctx.shadowBlur = 0
+    }
+
 }
